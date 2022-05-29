@@ -69,18 +69,22 @@ class LiveClient:
                 self._resume()
             refresh(self)
 
-        def on_click_nav_prev(self, steps=1):
-            self._pause()
-            self._set_data_by_idx(self._datahandler.get_last_idx() - steps)
-            update_nav_buttons(self)
+        # def on_click_nav_prev(self, steps=1):
+        #     self._pause()
+        #     self._set_data_by_idx(self._datahandler.get_last_idx() - steps)
+        #     update_nav_buttons(self)
 
-        def on_click_nav_next(self, steps=1):
-            self._pause()
-            self._set_data_by_idx(self._datahandler.get_last_idx() + steps)
-            update_nav_buttons(self)
+        # def on_click_nav_next(self, steps=1):
+        #     self._pause()
+        #     self._set_data_by_idx(self._datahandler.get_last_idx() + steps)
+        #     update_nav_buttons(self)
 
         def refresh(self):
-            self.doc.add_next_tick_callback(partial(update_nav_buttons, self))
+            pass
+            # try:
+            #     self.doc.add_next_tick_callback(partial(update_nav_buttons, self))
+            # except Exception as e:
+            #     print(e)
 
         def reset_nav_buttons(self):
             btn_nav_prev.disabled = True
@@ -122,25 +126,26 @@ class LiveClient:
             'value',
             partial(on_select_filter, self))
         # nav
-        btn_nav_prev = Button(label='❮', width=self.NAV_BUTTON_WIDTH)
-        btn_nav_prev.on_click(partial(on_click_nav_prev, self))
-        btn_nav_prev_big = Button(label='❮❮', width=self.NAV_BUTTON_WIDTH)
-        btn_nav_prev_big.on_click(partial(on_click_nav_prev, self, 10))
-        btn_nav_action = Button(label='❙❙', width=self.NAV_BUTTON_WIDTH)
-        btn_nav_action.on_click(partial(on_click_nav_action, self))
-        btn_nav_next = Button(label='❯', width=self.NAV_BUTTON_WIDTH)
-        btn_nav_next.on_click(partial(on_click_nav_next, self))
-        btn_nav_next_big = Button(label='❯❯', width=self.NAV_BUTTON_WIDTH)
-        btn_nav_next_big.on_click(partial(on_click_nav_next, self, 10))
+        # btn_nav_prev = Button(label='❮', width=self.NAV_BUTTON_WIDTH)
+        # btn_nav_prev.on_click(partial(on_click_nav_prev, self))
+        # btn_nav_prev_big = Button(label='❮❮', width=self.NAV_BUTTON_WIDTH)
+        # btn_nav_prev_big.on_click(partial(on_click_nav_prev, self, 10))
+        # btn_nav_action = Button(label='❙❙', width=self.NAV_BUTTON_WIDTH)
+        # btn_nav_action.on_click(partial(on_click_nav_action, self))
+        # btn_nav_next = Button(label='❯', width=self.NAV_BUTTON_WIDTH)
+        # btn_nav_next.on_click(partial(on_click_nav_next, self))
+        # btn_nav_next_big = Button(label='❯❯', width=self.NAV_BUTTON_WIDTH)
+        # btn_nav_next_big.on_click(partial(on_click_nav_next, self, 10))
+
         # layout
         controls = row(
             children=[select_filter])
-        nav = row(
-            children=[btn_nav_prev_big,
-                      btn_nav_prev,
-                      btn_nav_action,
-                      btn_nav_next,
-                      btn_nav_next_big])
+        # nav = row(
+        #     children=[btn_nav_prev_big,
+        #               btn_nav_prev,
+        #               btn_nav_action,
+        #               btn_nav_next,
+        #               btn_nav_next_big])
         # tabs
         tabs = Tabs(
             id='tabs',
@@ -150,8 +155,9 @@ class LiveClient:
             [
                 # app settings, top area
                 [column(controls, width_policy='min'),
-                 Spacer(),
-                 column(nav, width_policy='min')],
+                #  Spacer(),
+                #  column(nav, width_policy='min')
+                 ],
                 Spacer(height=15),
                 # layout for tabs
                 [tabs]
@@ -182,7 +188,7 @@ class LiveClient:
             fill_gaps=self.fill_gaps)
 
         # refresh model
-        self._refresh_fnc()
+        #self._refresh_fnc()
         self.doc.unhold()
 
     def _get_filter(self):

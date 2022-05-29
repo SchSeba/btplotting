@@ -30,8 +30,11 @@ that accepts these same parameters.
         {%if show_headline %}
             <h1 id="headline">{{ headline|e if headline else "Backtest" }}</h1>
         {%endif%}
-        {{ plot_div|indent(8) }}
-        {{ plot_script|indent(8) }}
+        <div class="test" style="position: inherit; margin-right: 15px;">
+            {{ plot_div|indent(8) }}
+            {{ plot_script|indent(8) }}
+        </div>
+        
 
         <div class="footer">Generated on: {{ now }}</div>
     </body>
